@@ -1,0 +1,14 @@
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\ExcelPixelArt.exe.config
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\obj\Debug\ExcelPixelArt.csprojResolveAssemblyReference.cache
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\ExcelPixelArt.exe
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\ExcelPixelArt.pdb
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\ICSharpCode.SharpZipLib.dll
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\NPOI.dll
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\NPOI.OOXML.dll
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\NPOI.OpenXml4Net.dll
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\NPOI.OpenXmlFormats.dll
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\NPOI.xml
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\obj\Debug\ExcelPixelArt.exe
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\obj\Debug\ExcelPixelArt.pdb
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\demo.jpg
+c:\users\xupeiyao\Documents\GitHub\ExcelPixelArt\ExcelPixelArt\bin\Debug\demo.png
