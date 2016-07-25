@@ -1,6 +1,4 @@
-﻿using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,11 +18,8 @@ namespace ExcelPixelArt {
             short pSize = 4, cl = 1;
             if(args.Length > 1) short.TryParse(args[1], out pSize);
             if(args.Length > 2) short.TryParse(args[2], out cl);
-
-            FileStream file = new FileStream($"{Guid.NewGuid()}.xlsx", FileMode.Create);
-
-            new PixelArtConverter(pSize,cl).Convert(args[0]).Write(file);
-            file.Close();
+            
+            new PixelArtConverter(pSize,cl).Convert(args[0], $"{Guid.NewGuid()}.xlsx");
         }
     }
 }
