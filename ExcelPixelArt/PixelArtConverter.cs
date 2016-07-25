@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace ExcelPixelArt {
     public class PixelArtConverter {
@@ -31,53 +33,74 @@ namespace ExcelPixelArt {
             this.Clarity = clarity;
         }
 
+        private Bitmap BitmapColorConvert(Bitmap image) {
+            return ImageConvertor.Convertor1.ConvertTo8bppFormat(image);
+        }
+
+        
         private Bitmap Zoom(Bitmap image) {
             //ref : http://stackoverflow.com/questions/23879178/zoom-bitmap-image 
             Bitmap result = new Bitmap(image.Width / Clarity, image.Height / Clarity);
             Graphics g = Graphics.FromImage(result);
-            Rectangle srcRect = new Rectangle(0,0,image.Width,image.Height);
-            Rectangle dstRect = new Rectangle(0,0,result.Width,result.Height);
+            Rectangle srcRect = new Rectangle(0, 0, image.Width, image.Height);
+            Rectangle dstRect = new Rectangle(0, 0, result.Width, result.Height);
             g.DrawImage(image, dstRect, srcRect, GraphicsUnit.Pixel);
 
             return result;
         }
 
+        private XSSFColor[][] BitmapToExcelColorArray(Bitmap image) {
+            XSSFColor[][] result = new XSSFColor[image.Width][];
+            for (int x = 0; x < image.Width; x++) {
+                result[x] = new XSSFColor[image.Height];
+                for (int y = 0; y < image.Height; y++) {
+                    result[x][y] = new XSSFColor(image.GetPixel(x, y));
+                }
+            }
+            return result;
+        }
 
         public IWorkbook Convert(string filePath) => Convert(new Bitmap(filePath));
 
         public IWorkbook Convert(Image image) => Convert(new Bitmap(image));
 
         public IWorkbook Convert(Bitmap image) {
-            Bitmap zoomImage = Zoom(image);//縮放處裡
+            Bitmap zoomImage = Zoom(BitmapColorConvert(image));//縮放
+            var data = BitmapToExcelColorArray(zoomImage);
+
             IWorkbook result = new XSSFWorkbook();//Excel 2007+
             ISheet sheet = result.CreateSheet("pixelArt");//產生工作表
             double temp = zoomImage.Width * zoomImage.Height;
-            for(int col = 0; col < zoomImage.Width; col++) {
+
+            //欄寬設定
+            for (int col = 0; col < zoomImage.Width; col++) {
                 sheet.SetColumnWidth(col, 37 * PixelSize);//1000 = 27px 1px
             }
-
             for (int row = 0; row < zoomImage.Height; row++) {
-                var Row = sheet.CreateRow(row);
-                var temp2 = row * zoomImage.Width;
-                Row.Height = (short)(15* PixelSize);//60 = 4px  1px = 15
-                for (int col = 0; col < zoomImage.Width; col++) {
-                    Console.WriteLine((temp2 + col) / temp);
-                    var Cell = Row.CreateCell(col);
-                    
-                    //Cell.SetCellValue("GG");
-                    var color = new XSSFColor(zoomImage.GetPixel(col, row));
-
-
-                    XSSFCellStyle style = (XSSFCellStyle)result.CreateCellStyle();
-                    style.SetFillForegroundColor(color);
-                    style.FillPattern = FillPattern.SolidForeground;
-
-                    Cell.CellStyle = style;
-                }
+                sheet.CreateRow(row);
             }
 
-            
-            
+            double okRow = 0;
+            //Parallel.For(0, 2, x => {
+                for (int row = 0/*x==0 ? 0 : data[0].Length - 1*/;
+                     /*x== 0 ?*/ row < data[0].Length/* / 2 : row >= data[0].Length / 2*/;
+                     row++/*row+= x == 0 ? 1 : -1*/) {
+                    var Row = sheet.CreateRow(row);
+                    Row.Height = (short)(15 * PixelSize);
+                    for (int col = 0; col < data.Length; col++) {
+
+                        var Cell = Row.CreateCell(col);
+
+                        XSSFCellStyle style = (XSSFCellStyle)result.CreateCellStyle();
+                        style.SetFillForegroundColor(data[col][row]);
+                        style.FillPattern = FillPattern.SolidForeground;
+
+                        Cell.CellStyle = style;
+                    }
+                    okRow++;
+                    Console.WriteLine($"執行進度: {Math.Round((okRow / data[0].Length) * 100)}%");
+                }
+            //});
             return result;
         }
     }
