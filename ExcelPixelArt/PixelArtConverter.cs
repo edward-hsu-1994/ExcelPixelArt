@@ -23,11 +23,16 @@ namespace ExcelPixelArt {
         public int Clarity { get; private set; }
 
         /// <summary>
+        /// 圖片品質，如果true則表示自動轉換圖片為256色
+        /// </summary>
+        public bool LowQuality { get; private set; }
+        
+        /// <summary>
         /// 初始化Excel像素藝術轉換器實例
         /// </summary>
         /// <param name="pixelSize">像素長寬</param>
         /// <param name="clarity">清晰度</param>
-        public PixelArtConverter(short pixelSize = 8, int clarity = 1) {
+        public PixelArtConverter(short pixelSize = 8, int clarity = 1, bool lowQuality = false) {
             if (pixelSize <= 0) throw new ArgumentException($"{nameof(pixelSize)}不應該為0或負數");
             if (clarity <= 0) throw new ArgumentException($"{nameof(clarity)}不應該為0或負數");
             this.PixelSize = pixelSize;
@@ -41,7 +46,7 @@ namespace ExcelPixelArt {
 
         private Bitmap Zoom(Bitmap image) {
             //ref : http://stackoverflow.com/questions/23879178/zoom-bitmap-image 
-            Bitmap result = new Bitmap(image.Width / Clarity, image.Height / Clarity);
+            Bitmap result = new Bitmap(image.Width / Clarity, image.Height / Clarity,PixelFormat.Format32bppArgb);
             Graphics g = Graphics.FromImage(result);
             Rectangle srcRect = new Rectangle(0, 0, image.Width, image.Height);
             Rectangle dstRect = new Rectangle(0, 0, result.Width, result.Height);
@@ -70,7 +75,9 @@ namespace ExcelPixelArt {
 
             Bitmap zoomImage = Zoom(image);//縮放
 
-            //Bitmap zoomImage = Zoom(BitmapColorConvert(image));//縮放
+            if (LowQuality) {//低色彩品質
+                zoomImage = BitmapColorConvert(zoomImage);
+            }
 
             var data = BitmapToColorArray(zoomImage);
             using (ExcelPackage excelPackage = new ExcelPackage(newFile)) {
@@ -82,6 +89,8 @@ namespace ExcelPixelArt {
                 for (int row = 0; row < data[0].Length; row++) {
                     worksheet.Row(row + 1).Height = 10.0 / 13.0 * PixelSize;//10 = 13px
                     for (int col = 0; col < data.Length; col++) {
+                        if(data[col][row].A == 0)continue;//透明背景
+
                         worksheet.Cells[row + 1, col + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
                         worksheet.Cells[row + 1, col + 1].Style.Fill.BackgroundColor.SetColor(data[col][row]);
                     }
