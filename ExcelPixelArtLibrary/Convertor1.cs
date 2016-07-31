@@ -9,6 +9,7 @@ using System.Drawing.Imaging;
 
 //ref http://www.codeproject.com/Articles/17162/Fast-Color-Depth-Change-for-Bitmaps
 namespace ImageConvertor {
+    class Convertor1 {
 
 
         public static Bitmap ConvertTo8bppFormat(Bitmap image) {
