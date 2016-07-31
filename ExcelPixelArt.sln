@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelPixelArt", "ExcelPixel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelPixelArtTests", "ExcelPixelArtTests\ExcelPixelArtTests.csproj", "{9B44C0DB-3200-458B-B09B-5E29D2CA8A3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelPixelArtLibrary", "ExcelPixelArtLibrary\ExcelPixelArtLibrary.csproj", "{FA851BAB-AD17-4B02-B233-15A91C319C3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9B44C0DB-3200-458B-B09B-5E29D2CA8A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B44C0DB-3200-458B-B09B-5E29D2CA8A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B44C0DB-3200-458B-B09B-5E29D2CA8A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA851BAB-AD17-4B02-B233-15A91C319C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA851BAB-AD17-4B02-B233-15A91C319C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA851BAB-AD17-4B02-B233-15A91C319C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA851BAB-AD17-4B02-B233-15A91C319C3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,7 @@
+C:\Users\XuPeiYao\Documents\GitHub\ExcelPixelArt\ExcelPixelArtLibrary\bin\Debug\ExcelPixelArtLibrary.dll
+C:\Users\XuPeiYao\Documents\GitHub\ExcelPixelArt\ExcelPixelArtLibrary\bin\Debug\ExcelPixelArtLibrary.pdb
+C:\Users\XuPeiYao\Documents\GitHub\ExcelPixelArt\ExcelPixelArtLibrary\bin\Debug\EPPlus.dll
+C:\Users\XuPeiYao\Documents\GitHub\ExcelPixelArt\ExcelPixelArtLibrary\bin\Debug\EPPlus.xml
+C:\Users\XuPeiYao\Documents\GitHub\ExcelPixelArt\ExcelPixelArtLibrary\obj\Debug\ExcelPixelArtLibrary.csprojResolveAssemblyReference.cache
+C:\Users\XuPeiYao\Documents\GitHub\ExcelPixelArt\ExcelPixelArtLibrary\obj\Debug\ExcelPixelArtLibrary.dll
+C:\Users\XuPeiYao\Documents\GitHub\ExcelPixelArt\ExcelPixelArtLibrary\obj\Debug\ExcelPixelArtLibrary.pdb
